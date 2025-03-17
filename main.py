@@ -6,7 +6,7 @@ import logging
 from datetime import datetime
 from jinja2 import Template
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,8 @@ class HttpHandler(BaseHTTPRequestHandler):
 
     def send_html_file(self, filename, status=200):
         try:
-            with open(filename, 'rb') as fd:
+            filepath = os.path.join("templates", filename)
+            with open(filepath, 'rb') as fd:
                 self.send_response(status)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
